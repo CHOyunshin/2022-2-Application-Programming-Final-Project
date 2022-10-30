@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=shark&color=auto&height=500&section=header&text=2022-2%20Application%20Programming&fontSize=42)
+![header](https://capsule-render.vercel.app/api?type=shark&color=auto&height=400&section=header&text=2022-2%20Application%20Programming&fontSize=42)
 
 # :rocket: Link :rocket:
 <!-- > ### Notion  -->
@@ -9,7 +9,7 @@
 ## Notice 
 > ### Google Calendar -->
 > <img src = "https://img.shields.io/badge/Google Calendar : Final Projects-4285F4?style=for-the-badge&logo=appveyor&logo=Notion&logoColor=white">
-><a href="https://www.notion.so/2022-2-Application-Programming-Final-Project-351ca5b4a69e4451b68ea13b796b626c" target="_blank"><img src="https://img.shields.io/badge/Google Calendar-000000?style=flat-square&logo=Google Calendar&logoColor=white"/></a>
+><a href="https://calendar.google.com/calendar/u/3?cid=Y18xYmNiODk4MDdmMmUyN2YxNzdhNTlmYmI3N2YwNzA5YTMwOWEyMDMxOTEyYTRmODYzZjg1YmZmNGMzYjhlYjYxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" target="_blank"><img src="https://img.shields.io/badge/Google Calendar-000000?style=flat-square&logo=Google Calendar&logoColor=white"/></a>
 
 
 
