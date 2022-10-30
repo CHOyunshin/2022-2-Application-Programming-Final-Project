@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=shark&color=auto&height=400&section=header&text=2022-2%20Application%20Programming&fontSize=42)
+![header](https://capsule-render.vercel.app/api?type=shark&color=auto&height=300&section=header&text=2022-2%20Application%20Programming&fontSize=45)
 
 # :rocket: Link :rocket:
 <!-- > ### Notion  -->
