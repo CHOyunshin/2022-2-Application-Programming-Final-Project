@@ -7,7 +7,7 @@ def makejson(result):
 
     datas = result.pose_landmarks.landmark
     landmark_dict = {}
-
+    landmark_list = []
     for idx, data in enumerate(datas):
         j = {
             "index":idx,
@@ -16,8 +16,9 @@ def makejson(result):
             "z":data.z,
             "visibility":data.visibility
         }
-        landmark_dict[landmark_name(idx)] = j
+        landmark_list.append(j)
 
+    landmark_dict['joint'] = landmark_list    
     landmark_json = json.dumps(landmark_dict, indent=2)
 
     return landmark_json

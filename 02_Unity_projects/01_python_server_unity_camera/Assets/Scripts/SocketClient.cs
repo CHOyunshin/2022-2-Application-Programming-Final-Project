@@ -5,8 +5,23 @@ using System;
 using System.IO;
 using System.Net.Sockets;
 
+[System.Serializable] public class Joint
+{
+    public int index;
+    public float x;
+    public float y;
+    public float z;
+    public float visibility;
+}
+
+[System.Serializable]  public class JointList
+{
+    public Joint[] joint;
+}
+
 public class SocketClient : MonoBehaviour
 {
+    public GameObject obj;
     public WebcamHandler webcamHandler;
     public string serverIp = "localhost";
     public int serverPort = 5000;
@@ -14,7 +29,8 @@ public class SocketClient : MonoBehaviour
     private NetworkStream stream;
     bool isSending = false;
     private Coroutine coSendImageE;
-    
+    public JointList jointList = new JointList();
+        
     // 서버연결
     // Connect 버튼 onClick과 연결
     public void ConnectToServer()
@@ -65,8 +81,8 @@ public class SocketClient : MonoBehaviour
                 if (stream.CanWrite)
                 {                           
                     stream.Write(data, 0, data.Length);                 
-                    Debug.Log("Client sent his message - should be received by server");
                     isSending = false;
+                    // 서버에 보낸 HPE 결과 읽어옴.
                     RecvJson();
                 }         
             } 		
@@ -108,7 +124,8 @@ public class SocketClient : MonoBehaviour
                     landmarkJson.AppendFormat("{0}", Encoding.ASCII.GetString(buffer, 0, numOfBytesRead));
                 }
                 while(stream.DataAvailable);
-                Debug.Log(landmarkJson);
+
+                jointList = JsonUtility.FromJson<JointList>(landmarkJson.ToString());
             }
             catch (SocketException socketException) {             
                 Debug.Log("Socket exception: " + socketException);

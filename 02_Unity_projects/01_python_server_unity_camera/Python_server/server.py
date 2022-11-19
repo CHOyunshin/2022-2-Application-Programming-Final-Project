@@ -35,10 +35,10 @@ while True:
             img, landmark_json = hpe(read_np)
             print('Message received!')
             
-            # # 서버 영상 출력 테스트용
-            # cv2.imshow('Mediapipe Pose', cv2.flip(img, 1))
-            # if cv2.waitKey(10) == 13:
-            #     cv2.destroyAllWindows()
+            # 서버 영상 출력 테스트용
+            cv2.imshow('Mediapipe Pose', cv2.flip(img, 1))
+            if cv2.waitKey(10) == 13:
+                cv2.destroyAllWindows()
             
             if landmark_json is not None:
                 clientSocket.sendall(landmark_json.encode())
@@ -50,6 +50,9 @@ while True:
         # client 연결 없을 시  소켓 닫음
         clientSocket.close()
         print('Disconnected!')
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
         # client 연결 대기
         clientSocket, addr = serverSocket.accept()
         print('Connection from ', addr[0])
