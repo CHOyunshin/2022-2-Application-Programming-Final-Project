@@ -93,12 +93,37 @@ public class SocketClient : MonoBehaviour
         }
 	}
 
+    // 서버에 이미지(jpg) 전송
+    // Send 버튼 onClick과 연결
+    private void TestImage() 
+    {
+        if(!isSending)
+        {
+            isSending = true;
+            stream = clientSocket.GetStream();
+            if (clientSocket == null) { return; }
+            try { 			
+                if (stream.CanWrite)
+                {                           
+                    isSending = false;
+                    // 서버에 보낸 HPE 결과 읽어옴.
+                    RecvJson();
+                }         
+            } 		
+            catch (SocketException socketException) {             
+                Debug.Log("Socket exception: " + socketException);
+                isSending = false;
+            }     
+        }
+	}
+
 
     private IEnumerator CoSendImage()
     {
         while(true)
         {
             SendImage();
+            // TestImage();
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -126,6 +151,7 @@ public class SocketClient : MonoBehaviour
                 while(stream.DataAvailable);
 
                 jointList = JsonUtility.FromJson<JointList>(landmarkJson.ToString());
+                // Debug.Log(landmarkJson);
             }
             catch (SocketException socketException) {             
                 Debug.Log("Socket exception: " + socketException);
