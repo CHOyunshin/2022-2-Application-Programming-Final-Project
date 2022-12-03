@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class BombObject : MonoBehaviour
 {
+    private bool raised = false;
+    public string side;
     public bool canBePressed;
-    public KeyCode keyToPress;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(keyToPress))
+        raised = GameManager.instance.GetJoints(SocketClient.instance, side);
+        if (raised)
         {
             if (canBePressed)
             {
