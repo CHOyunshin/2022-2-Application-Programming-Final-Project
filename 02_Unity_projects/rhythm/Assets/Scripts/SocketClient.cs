@@ -21,6 +21,7 @@ using System.Net.Sockets;
 
 public class SocketClient : MonoBehaviour
 {
+    public static SocketClient instance;
     public WebcamHandler webcamHandler;
     public string serverIp = "localhost";
     public int serverPort = 5000;
@@ -29,7 +30,11 @@ public class SocketClient : MonoBehaviour
     bool isSending = false;
     private Coroutine coSendImageE;
     public JointList jointList = new JointList();
-        
+
+    void Start()
+    {
+        instance = this;
+    }
     // 서버연결
     // Connect 버튼 onClick과 연결
     public void ConnectToServer()

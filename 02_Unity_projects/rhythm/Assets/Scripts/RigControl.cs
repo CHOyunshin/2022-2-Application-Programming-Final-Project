@@ -3,7 +3,6 @@ using UnityEngine;
 public class RigControl : MonoBehaviour
 {
     public GameObject Remy;
-    public SocketClient socketClient;
     private Animator anim;
     private Transform lua, lla, rua, rla;
     private Quaternion lua_init, lla_init, rua_init, rla_init;
@@ -28,7 +27,7 @@ public class RigControl : MonoBehaviour
 
     void Update()
     {
-        joints = socketClient.jointList.joint;
+        joints = SocketClient.instance.jointList.joint;
         if(joints.Length > 0)
         {
             Vector3[] lualla = CalcArms(joints, "left");

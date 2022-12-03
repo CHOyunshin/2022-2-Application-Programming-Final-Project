@@ -171,4 +171,33 @@ public class GameManager : MonoBehaviour
         currentScore = 0;
         remainingLife = 3;
     }
+    public bool GetJoints(SocketClient sc, string side)
+    {
+        if (sc.jointList.joint.Length > 0)
+        {
+            Joint[] joints = sc.jointList.joint;
+            if (side == "left")
+            {
+                if (joints[11].y > joints[15].y)
+                {
+                    return true;
+                }
+                else
+                { return false; }
+            }
+            else
+            {
+                if (joints[12].y > joints[16].y)
+                {
+                    return true;
+                }
+                else
+                { return false; }
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

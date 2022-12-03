@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 public class WebcamHandler : MonoBehaviour
 {
-    public SocketClient SocketClient;
     public GameObject objectTarget = null;
     protected WebCamTexture textureWebCam = null;
     private Color[] data;
