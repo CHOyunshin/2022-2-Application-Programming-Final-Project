@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
+    public SocketClient socketClient;
     private SpriteRenderer SR;
     public Sprite defaultImage;
     public Sprite pressedImage;
 
-    //ÀÌ ºÎºÐÀº ³ªÁß¿¡ ¼Õ À§Ä¡ ÀÎ½ÄÀ¸·Î ±³Ã¼
-    public KeyCode keyToPress;
+    //ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    public string side;
     private bool raised = false;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         SR = GetComponent<SpriteRenderer>();
@@ -22,14 +22,7 @@ public class ButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(keyToPress))
-        {
-            raised = true;
-        }
-        if (Input.GetKeyUp(keyToPress))
-        {
-            raised = false;
-        }
+        raised = GetJoints(socketClient, side);
 
         if (raised)
         {
@@ -38,6 +31,36 @@ public class ButtonController : MonoBehaviour
         else
         {
             SR.sprite = defaultImage;
+        }
+    }
+
+    private bool GetJoints(SocketClient sc, string side)
+    {
+        if(sc.jointList.joint.Length > 0)
+        {
+            Joint[] joints = sc.jointList.joint;
+            if(side == "left")
+            {
+                if(joints[11].y > joints[15].y)
+                {
+                    return true;
+                }
+                else 
+                { return false; }
+            }
+            else
+            {
+                if(joints[12].y > joints[16].y)
+                {
+                    return true;
+                }
+                else
+                { return false; }
+            }
+        }
+        else
+        {
+            return false;
         }
     }
 }
