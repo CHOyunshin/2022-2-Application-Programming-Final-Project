@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
-    public SocketClient socketClient;
     private SpriteRenderer SR;
     public Sprite defaultImage;
     public Sprite pressedImage;
@@ -21,7 +20,7 @@ public class ButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        raised = GameManager.instance.GetJoints(socketClient, side);
+        raised = GameManager.instance.GetJoints(SocketClient.instance, side);
 
         if (raised)
         {
