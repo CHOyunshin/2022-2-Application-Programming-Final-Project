@@ -41,41 +41,36 @@ public class Match_Area : MonoBehaviour
     private void Update()
     {
         stayTime += Time.deltaTime;
-        
-
         if (is_enter) is_stay = true;
-
+        // if (RS.currentScore > Qgauge && b_fever)
+        // {
+        //     try
+        //     {
+        //         GameObject NoF = GameObject.Find("Nofever");
+        //         NoF.SetActive(false);
+        //     }
+        //     catch { }
+        //     FA.FeverStart();
+        //     b_fever = false;
+        // }
         
-        if (RS.currentScore > Qgauge && b_fever)
-        {
-            try
-            {
-                GameObject NoF = GameObject.Find("Nofever");
-                NoF.SetActive(false);
-            }
-            catch { }
-            FA.FeverStart();
-            b_fever = false;
-        }
-        
-        try
-        {
-            if (Input.GetKeyDown(KeyCode.Q) && fever == false && RS.currentScore>Qgauge)
-            {
-                Debug.Log("try");
-                CA.WakeUp();
-                b_fever = true;
-                FA.FeverEnd();
-                t1 = Instantiate(CH, new Vector3(1, 0, 1.7f), Quaternion.Euler(0, -90, 0));
-                t2 = Instantiate(CH, new Vector3(1, 0, -1.7f), Quaternion.Euler(0, -90, 0));
-                stayTime2 = stayTime;
-                stayOver = true;
-                fever = true;
-                Qgauge += 30000;
-            }
-        }
-        catch{ }
-
+        // try
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Q) && fever == false && RS.currentScore>Qgauge)
+        //     {
+        //         Debug.Log("try");
+        //         CA.WakeUp();
+        //         b_fever = true;
+        //         FA.FeverEnd();
+        //         t1 = Instantiate(CH, new Vector3(1, 0, 1.7f), Quaternion.Euler(0, -90, 0));
+        //         t2 = Instantiate(CH, new Vector3(1, 0, -1.7f), Quaternion.Euler(0, -90, 0));
+        //         stayTime2 = stayTime;
+        //         stayOver = true;
+        //         fever = true;
+        //         Qgauge += 30000;
+        //     }
+        // }
+        // catch{ }
         if (Input.GetKeyDown(KeyCode.D) && fever == false)
         {
             WDcnt = 1.7f;
@@ -120,7 +115,8 @@ public class Match_Area : MonoBehaviour
     }
     public void OnTriggerExit(Collider other)
     {
-        MC.animator.Play("DamageDown", -1, 0);  //박스가 매치에어리어를 빠져나온다면 대미지다운 애니메이션 재생
+        MC.animator.Play("DamageDown", -1, 0);  
+        //박스가 매치에어리어를 빠져나온다면 대미지다운 애니메이션 재생
         HC.TakeDamage(7);
         JAC.JudgeStart(1);
         SC.currentScore = 0;

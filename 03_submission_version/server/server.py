@@ -6,7 +6,7 @@ from hpe import hpe
 import cv2
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
-serverPort = 5002
+serverPort = 5002 
 serverSocket.bind(('localhost', serverPort))
 serverSocket.listen(1)
 print('server listening')
