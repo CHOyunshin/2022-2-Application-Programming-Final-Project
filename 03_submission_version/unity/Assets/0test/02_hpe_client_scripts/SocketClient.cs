@@ -21,8 +21,7 @@ using System.Net.Sockets;
 
 public class SocketClient : MonoBehaviour
 {
-    public GameObject obj;
-    public WebcamHandler webcamHandler;
+    public static SocketClient instance;
     public string serverIp = "localhost";
     public int serverPort = 5000;
     private TcpClient clientSocket;
@@ -30,7 +29,11 @@ public class SocketClient : MonoBehaviour
     bool isSending = false;
     private Coroutine coSendImageE;
     public JointList jointList = new JointList();
-        
+
+    void Start()
+    {
+        instance = this;
+    }
     // 서버연결
     // Connect 버튼 onClick과 연결
     public void ConnectToServer()
@@ -74,7 +77,7 @@ public class SocketClient : MonoBehaviour
         if(!isSending)
         {
             isSending = true;
-            byte[] data = webcamHandler.MakeImgtoByte();
+            byte[] data = WebcamHandler.instance.MakeImgtoByte();
             stream = clientSocket.GetStream();
             if (clientSocket == null) { return; }
             try { 			
