@@ -11,10 +11,7 @@ public class Note : MonoBehaviour
     private void Start()
     {
         //child = transform.Find("CFX4 Sparks Explosion B").gameObject;
-        //Debug.Log(child.name);
-       
-
-
+        //Debug.Log(child.name)
 
     }
     //public GameObject FindChild()
@@ -24,12 +21,13 @@ public class Note : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
         transform.position += Vector3.right * noteSpeed * Time.deltaTime;
-
     }
-    
-    
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "ARM")
+        {
+            Debug.Log("충돌");
+        }
+    }
 }

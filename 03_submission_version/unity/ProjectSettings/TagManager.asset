@@ -9,6 +9,7 @@ TagManager:
   - FxTemporaire
   - MyParticle
   - Score
+  - ARM
   layers:
   - Default
   - TransparentFX
