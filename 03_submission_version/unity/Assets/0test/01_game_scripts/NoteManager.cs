@@ -12,7 +12,6 @@ public class NoteManager : MonoBehaviour
     Result theResult;
     Pause ps;
     NewStartMenu NSM;
-
     public bool IsPause;
     public int bpm = 0;
     double currentTime = 0d;
@@ -29,6 +28,12 @@ public class NoteManager : MonoBehaviour
     bool musicStart = false;
     public Transform NoteAppear = null;
     public GameObject goNote = null;
+    
+    // object 생성 timer로 변경 
+    private float timer;
+    public float waitingTime;
+    
+    // 생성위치 설정 부분 
     int rnd = 0;
     private int rnd_y = 0;
     Vector3 v3;
@@ -39,20 +44,26 @@ public class NoteManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Background Audio Setting 
         Time.timeScale = 1;
         IsPause = false;
+        myAudio = GetComponent<AudioSource>();
+        myAudio.clip = bgm[1];
+        myAudio.Play();
         theResult = FindObjectOfType<Result>();
         ps = FindObjectOfType<Pause>();
         
-    }
+        // note 생성 timer 작성 
+        timer = 0f;
+        waitingTime = 1.5f;
 
+    }
     // Update is called once per frame
     void Update()
     {
         currentTime += Time.deltaTime * 2;        
         rnd = UnityEngine.Random.Range(1, 3);
         rnd_y = UnityEngine.Random.Range(1, 3);
-        
         v3 = new Vector3(NoteAppear.position.x, NoteAppear.position.y +(1.2f)*rnd_y -0.7f ,  rnd * 2.6f - 4.1f);
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -74,118 +85,20 @@ public class NoteManager : MonoBehaviour
                 return;
             }
         }
-
-        totalTime += Time.deltaTime;
-
-
-        //////////////////////////////////
-        if (totalTime >= 36d && totalTime <= 50d || totalTime >= 110d && totalTime < 123d || totalTime >= 170d && totalTime < 182d)
-        {
-            if (currentTime >= 49d / bpm && p1 == true)
-            {
-                GameObject t_note = Instantiate(goNote, v3, Quaternion.Euler(0, 90, 0));
-                blockcnt1++;
-                currentTime -= 49d / bpm;
-                if (blockcnt1 == 3)
-                {
-                    p1 = false;
-                }
-            }
-
-            if (!p1)
-            {
-                cnt1 += Time.deltaTime;
-
-                if (cnt1 >= 100d / bpm)
-                {
-                    blockcnt1 = 0;
-                    cnt1 = 0d;
-                    currentTime = 0d;
-                    p1 = true;
-                }
-
-            }
         
-        }else if (totalTime >= 180d)
+        // totalTime += Time.deltaTime;
+        
+        timer += Time.deltaTime;
+        if(timer > waitingTime)
         {
-            p = false;            
-        }       
-        else if (totalTime >= 123d && totalTime < 136d)
-        {
-            if (currentTime >= 164d / bpm)
-            {
-                GameObject t_note = Instantiate(goNote, v3, Quaternion.Euler(0, 90, 0));
-                currentTime -= 164d / bpm;                
-            }
+            GameObject t_note = Instantiate(goNote, v3, Quaternion.Euler(0, 90, 0));
+            timer = 0;
         }
-        else if (totalTime >= 136d && totalTime < 148d)
-        {
-            if (currentTime >= 49d / bpm)
-            {
-                GameObject t_note = Instantiate(goNote, v3, Quaternion.Euler(0, 90, 0));
-                currentTime -= 49d / bpm;
-            }
-        }
-        else if (totalTime >= 75d && totalTime < 99d)
-        {
-            if (currentTime >= 49d / bpm && p2 == true)
-            {
-                GameObject t_note = Instantiate(goNote, v3, Quaternion.Euler(0, 90, 0));
-                blockcnt2++;
-                currentTime -= 49d / bpm;
-                if (blockcnt2 == 4)
-                {
-                    p2 = false;
-                }
-            }
-            if (!p2)
-            {
-                cnt2 += Time.deltaTime;
-
-                if (cnt2 >= 100d / bpm)
-                {
-                    blockcnt2 = 0;
-                    cnt2 = 0d;
-                    currentTime = 0d;
-                    p2 = true;
-                }
- 
-            }
-        }
-        else
-        {
-            if (currentTime >= 49d / bpm && p == true)
-            {
-                GameObject t_note = Instantiate(goNote, v3, Quaternion.Euler(0, 90, 0));
-                blockcnt++;
-                currentTime -= 49d / bpm;
-                if (blockcnt == 7)
-                {
-                    p = false;
-                }
-            }
-            if (!p && q)
-            {
-                cnt += Time.deltaTime;
-
-                if (cnt >= 80d / bpm)
-                {
-                    blockcnt = 0;
-                    cnt = 0d;
-                    currentTime = 0d;
-                    p = true;
-                }
-            }
-        }
-        ////////////////////////////
-
 
         if (totalTime >= 190d)
         {
             death();
         }
-
-
     }
     public void pauseCheck()
     {
