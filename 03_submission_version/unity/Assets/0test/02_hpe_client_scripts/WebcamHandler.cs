@@ -7,13 +7,14 @@ using System.Runtime.InteropServices;
 
 public class WebcamHandler : MonoBehaviour
 {
-    public SocketClient SocketClient;
+    public static WebcamHandler instance;
     public GameObject objectTarget = null;
     protected WebCamTexture textureWebCam = null;
     private Color[] data;
 
     void Start()
     {
+        instance = this;
         // 현재 사용 가능한 카메라의 리스트
         WebCamDevice[] devices = WebCamTexture.devices;
 
