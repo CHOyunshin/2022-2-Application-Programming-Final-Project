@@ -6,7 +6,7 @@ from hpe import hpe
 import cv2
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
-serverPort = 5002 
+serverPort = 5006
 serverSocket.bind(('localhost', serverPort))
 serverSocket.listen(1)
 print('server listening')
@@ -36,9 +36,9 @@ while True:
             print('Message received!')
             
             # 서버 영상 출력 테스트용
-            cv2.imshow('Mediapipe Pose', cv2.flip(img, 1))
-            if cv2.waitKey(10) == 13:
-                cv2.destroyAllWindows()
+            # cv2.imshow('Mediapipe Pose', cv2.flip(img, 1))
+            # if cv2.waitKey(10) == 13:
+            #     cv2.destroyAllWindows()
             
             if landmark_json is not None:
                 clientSocket.sendall(landmark_json.encode())

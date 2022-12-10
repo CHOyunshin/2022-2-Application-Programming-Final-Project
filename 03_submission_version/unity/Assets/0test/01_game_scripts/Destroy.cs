@@ -12,8 +12,13 @@ public class Destroy : MonoBehaviour
         //Debug.Log("miss");
         if (other.CompareTag("Note"))
         {
+            Note hh = other.GetComponent<Note>();
+            if (!hh.hit)
+            {
+                HP -= 10;
+            }
             Destroy(other.gameObject);
-            HP -= 10;
+            
         }
     }
 

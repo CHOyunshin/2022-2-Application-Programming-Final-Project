@@ -7,6 +7,7 @@ public class Note : MonoBehaviour
 
     //GameObject child;
     public float noteSpeed = 400;
+    public bool hit = false;
 
     private void Start()
     {
@@ -14,11 +15,11 @@ public class Note : MonoBehaviour
         //Debug.Log(child.name)
 
     }
-    //public GameObject FindChild()
-   // {
-        //return child;
-    //}
-    // Update is called once per frame
+    // public GameObject FindChild()
+    // {
+    //     return child;
+    // }
+    //  Update is called once per frame
     void Update()
     {
         transform.position += Vector3.right * noteSpeed * Time.deltaTime;
@@ -27,7 +28,11 @@ public class Note : MonoBehaviour
     {
         if (other.gameObject.tag == "ARM")
         {
-            Debug.Log("충돌");
+            GameManage.instance.ScoreUp();
+            SkinnedMeshRenderer msh = GetComponentInChildren<SkinnedMeshRenderer>();
+            msh.enabled = false;
+            hit = true;
+
         }
     }
 }

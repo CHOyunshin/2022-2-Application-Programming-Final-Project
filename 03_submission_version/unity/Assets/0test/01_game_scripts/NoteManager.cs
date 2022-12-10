@@ -30,6 +30,7 @@ public class NoteManager : MonoBehaviour
     public Transform NoteAppear = null;
     public GameObject goNote = null;
     int rnd = 0;
+    private int rnd_y = 0;
     Vector3 v3;
     public static bool p2 = true;
     int blockcnt2 = 0;
@@ -40,19 +41,6 @@ public class NoteManager : MonoBehaviour
     {
         Time.timeScale = 1;
         IsPause = false;
-
-        int x = NewStartMenu.current_song_num;
-        myAudio = GetComponent<AudioSource>();
-        myAudio.clip = bgm[x];
-        if (x == 0) bpm = 164;
-        else if (x == 1) bpm = 114;
-        else if (x == 2) bpm = 120;
-        else if (x == 3) bpm = 120;
-
-        myAudio.Play();
-
-
-
         theResult = FindObjectOfType<Result>();
         ps = FindObjectOfType<Pause>();
         
@@ -61,9 +49,11 @@ public class NoteManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;        
+        currentTime += Time.deltaTime * 2;        
         rnd = UnityEngine.Random.Range(1, 3);
-        v3 = new Vector3(NoteAppear.position.x, NoteAppear.position.y,  rnd * 3f - 4.45f);
+        rnd_y = UnityEngine.Random.Range(1, 3);
+        
+        v3 = new Vector3(NoteAppear.position.x, NoteAppear.position.y +(1.2f)*rnd_y -0.7f ,  rnd * 2.6f - 4.1f);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
