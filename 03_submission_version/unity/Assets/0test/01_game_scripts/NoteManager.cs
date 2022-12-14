@@ -7,12 +7,11 @@ public class NoteManager : MonoBehaviour
     public GameObject goUI = null;
     public AudioClip[] bgm = null;
     public AudioSource myAudio;
-    Result theResult;
+    // Result theResult;
     Pause ps;
-    NewStartMenu NSM;
     public bool IsPause;
-    int blockcnt = 0;
-    int blockcnt1 = 0;
+    // int blockcnt = 0;
+    // int blockcnt1 = 0;
     double cnt = 0d;
     double cnt1 = 0d;
     double totalTime = 0d;
@@ -30,7 +29,7 @@ public class NoteManager : MonoBehaviour
     Vector3 v3;
     public static bool p2 = true;
     int blockcnt2 = 0;
-    double cnt2 = 0;
+    // double cnt2 = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +40,7 @@ public class NoteManager : MonoBehaviour
         myAudio = GetComponent<AudioSource>();
         myAudio.clip = bgm[1];
         myAudio.Play();
-        theResult = FindObjectOfType<Result>();
+        // theResult = FindObjectOfType<Result>();
         ps = FindObjectOfType<Pause>();
         
         // note 생성 timer 작성 
@@ -75,9 +74,6 @@ public class NoteManager : MonoBehaviour
                 return;
             }
         }
-        
-        // totalTime += Time.deltaTime;
-        
         timer += Time.deltaTime;
         if(timer > waitingTime)
         {
@@ -106,7 +102,7 @@ public class NoteManager : MonoBehaviour
     public void death()
     {
         goUI.SetActive(false);
-        theResult.ShowResult();
+        // theResult.ShowResult();
         Time.timeScale = 0;
         myAudio.Stop();
         IsPause = true;        
