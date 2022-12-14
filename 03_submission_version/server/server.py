@@ -50,9 +50,6 @@ while True:
         # client 연결 없을 시  소켓 닫음
         clientSocket.close()
         print('Disconnected!')
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        cv2.waitKey(1)
         # client 연결 대기
         clientSocket, addr = serverSocket.accept()
         print('Connection from ', addr[0])
