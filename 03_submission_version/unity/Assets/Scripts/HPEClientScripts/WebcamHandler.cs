@@ -90,8 +90,6 @@ public class WebcamHandler : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         data = new Color[textureWebCam.width * textureWebCam.height];
-        Debug.Log(textureWebCam.width);
-        Debug.Log(textureWebCam.height);
     }
 
     // Stop 버튼이 눌렸을 때
